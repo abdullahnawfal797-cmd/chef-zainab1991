@@ -15,11 +15,13 @@
     .badge-out { filter: grayscale(1); opacity: 0.5; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    @keyframes pulse-glow {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.7; transform: scale(1.05); }
+    .admin-click-target {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
     }
-    .animate-glow { animation: pulse-glow 2s infinite ease-in-out; }
   </style>
 </head>
 <body class="text-slate-800 pb-36 min-h-screen selection:bg-red-600 selection:text-white">
@@ -33,10 +35,10 @@
   <!-- رأس الصفحة الفاخر -->
   <header class="bg-white/90 backdrop-blur-md shadow-sm border-b border-red-100 sticky top-0 z-30">
     <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
-      <!-- الشعار واسم المطعم (3 نقرات سريعة لفتح لوحة التحكم) -->
-      <div class="flex items-center gap-3 cursor-pointer select-none" id="secret-admin-trigger" onclick="handleSecretClick()" title="مطعم الشيف زينب">
+      <!-- الشعار واسم المطعم (3 نقرات لفتح لوحة التحكم) -->
+      <div class="flex items-center gap-3 cursor-pointer select-none admin-click-target" onclick="handleAdminClicks()">
         <div class="relative">
-          <img id="display-logo" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160" alt="Logo" class="w-12 h-12 rounded-2xl object-cover ring-2 ring-red-600 shadow-md pointer-events-none">
+          <img id="display-logo" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160" alt="Logo" class="w-12 h-12 rounded-2xl object-cover ring-2 ring-red-600 shadow-md">
           <span id="display-status-ping" class="absolute -bottom-1 -left-1 flex h-3.5 w-3.5">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white"></span>
@@ -84,7 +86,7 @@
     <div id="category-bar" class="flex gap-2 overflow-x-auto no-scrollbar py-1"></div>
   </nav>
 
-  <!-- قائمة الوجبات -->
+  <!-- قائمة الوجبات (توزيع مرن وشامل) -->
   <main class="max-w-md mx-auto px-4 mt-2 space-y-4" id="menu-container"></main>
 
   <!-- شريط السلة العائم -->
@@ -353,30 +355,23 @@
     let cart = [];
     let activeCategory = 'الكل';
 
-    // نظام فتح لوحة التحكم السري (3 نقرات أو ضغطة مطولة)
-    let secretClickCount = 0;
-    let secretClickTimer = null;
+    // عداد الثلاث نقرات الدقيق والمباشر
+    let adminClicks = 0;
+    let adminResetTimer = null;
 
-    function handleSecretClick() {
-      secretClickCount++;
-      clearTimeout(secretClickTimer);
-      if (secretClickCount >= 3) {
-        secretClickCount = 0;
+    function handleAdminClicks() {
+      adminClicks++;
+      clearTimeout(adminResetTimer);
+
+      if (adminClicks >= 3) {
+        adminClicks = 0;
         openAdminModal();
       } else {
-        secretClickTimer = setTimeout(() => {
-          secretClickCount = 0;
-        }, 1500); // مهلة مريحة مدتها 1.5 ثانية
+        adminResetTimer = setTimeout(() => {
+          adminClicks = 0;
+        }, 2000); // مهلة ثانيتين كاملتين لتسجيل الثلاث نقرات براحة
       }
     }
-
-    // دعم الضغط المطول للهواتف الذكية (لمدة 2 ثانية)
-    const triggerEl = document.getElementById('secret-admin-trigger');
-    let pressTimer = null;
-    triggerEl.addEventListener('touchstart', () => {
-      pressTimer = setTimeout(openAdminModal, 2000);
-    }, {passive: true});
-    triggerEl.addEventListener('touchend', () => clearTimeout(pressTimer));
 
     function persistData() {
       localStorage.setItem('chef_zainab_v3', JSON.stringify(appData));

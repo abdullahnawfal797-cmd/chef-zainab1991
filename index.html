@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>مطعم الشيف زينب والشيف هادر</title>
+  <title>مطعم الشيف زينب</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -16,12 +16,6 @@
       background: linear-gradient(135deg, #fce082 0%, #d4af37 50%, #aa7c11 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-    }
-    .gold-border {
-      border: 1px solid #d4af37;
-    }
-    .gold-bg {
-      background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -36,14 +30,14 @@
     <span>✨</span>
   </div>
 
-  <!-- ترويسة المطعم الملكية الفخمة -->
+  <!-- ترويسة المطعم -->
   <header class="bg-neutral-950/90 backdrop-blur-md border-b border-amber-500/30 sticky top-0 z-30">
     <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
       
       <div class="flex items-center gap-3">
         <div class="relative">
-          <div class="w-13 h-13 rounded-2xl bg-neutral-900 border-2 border-amber-500/80 p-0.5 shadow-lg flex items-center justify-center">
-            <span class="text-2xl">👨‍🍳</span>
+          <div class="w-12 h-12 rounded-2xl bg-neutral-900 border-2 border-amber-500/80 p-0.5 shadow-lg flex items-center justify-center">
+            <span class="text-2xl">👩‍🍳</span>
           </div>
           <span class="absolute -bottom-1 -left-1 flex h-3 w-3">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -51,17 +45,17 @@
           </span>
         </div>
         <div>
-          <h1 class="font-black text-base gold-gradient-text leading-tight">مطعم الشيف زينب والشيف هادر</h1>
-          <p class="text-[11px] text-amber-200/70 font-medium">نكهات منزلية شرقية وسريعة فريدة</p>
+          <h1 id="brand-name" class="font-black text-lg gold-gradient-text leading-tight">مطعم الشيف زينب</h1>
+          <p id="brand-hours" class="text-[11px] text-amber-200/70 font-medium">يومياً: 12:00 ظهراً - 12:00 ليلاً</p>
         </div>
       </div>
 
-      <!-- أزرار الاتصال السريع والإنستغرام -->
+      <!-- الاتصال والإنستغرام -->
       <div class="flex items-center gap-1.5">
-        <a href="https://instagram.com/alshyfzynb" target="_blank" class="w-8 h-8 rounded-xl bg-neutral-900 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xs shadow-sm hover:border-amber-400">
+        <a id="brand-insta" href="https://instagram.com/alshyfzynb" target="_blank" class="w-8 h-8 rounded-xl bg-neutral-900 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xs shadow-sm hover:border-amber-400">
           📸
         </a>
-        <a href="tel:07763133800" class="w-8 h-8 rounded-xl bg-amber-500 text-black font-black flex items-center justify-center text-xs shadow-md">
+        <a id="brand-call" href="tel:07763133800" class="w-8 h-8 rounded-xl bg-amber-500 text-black font-black flex items-center justify-center text-xs shadow-md">
           📞
         </a>
       </div>
@@ -69,20 +63,20 @@
 
     <!-- شريط معلومات المطعم -->
     <div class="bg-neutral-900/90 px-4 py-1.5 text-[11px] text-neutral-300 flex justify-between items-center border-t border-neutral-800 max-w-md mx-auto">
-      <span class="flex items-center gap-1"><span class="text-amber-400">📍</span> خدمة طلبات وتوصيل فوري</span>
-      <span class="font-bold text-amber-400">واتساب: 07763133800</span>
+      <span id="brand-location" class="flex items-center gap-1 truncate max-w-[210px]"><span class="text-amber-400">📍</span> أشهى المأكولات والوجبات السريعة</span>
+      <span id="brand-phone" class="font-bold text-amber-400">07763133800</span>
     </div>
   </header>
 
-  <!-- بنر ترحيبي فاخر بتصميم البوستر -->
+  <!-- بنر ترحيبي فاخر -->
   <div class="max-w-md mx-auto px-4 mt-3">
     <div class="rounded-3xl p-4 bg-gradient-to-b from-neutral-900 via-neutral-950 to-black border border-amber-500/40 shadow-2xl relative overflow-hidden">
       <div class="relative z-10 space-y-1.5">
         <div class="inline-block bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-full">
-          المذاق الملكي الأصيل 👑
+          المذاق البيتي الأصيل 👑
         </div>
-        <h2 class="text-lg font-black text-white">أشهى الأطباق المحضّرة يومياً بطزاجة تامة</h2>
-        <p class="text-xs text-neutral-400">اطلب الآن واستلم طلبك ساخناً من المطعم أو توصيل مباشر إلى باب بيتك</p>
+        <h2 class="text-base font-black text-white">أشهى الأطباق المحضّرة بحب ونظافة تامة</h2>
+        <p class="text-xs text-neutral-400">اطلب وجبتك واستلمها ساخنة من المطعم أو اختر التوصيل السريع إلى باب بيتك</p>
       </div>
       <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl"></div>
     </div>
@@ -96,12 +90,12 @@
     </div>
   </div>
 
-  <!-- شريط تصنيفات المنيو -->
+  <!-- التصنيفات -->
   <nav class="max-w-md mx-auto px-4 pt-4 pb-1 sticky top-[95px] bg-[#0b0c10]/95 backdrop-blur-md z-20">
     <div id="category-bar" class="flex gap-2 overflow-x-auto no-scrollbar py-1"></div>
   </nav>
 
-  <!-- قائمة الوجبات الملكية -->
+  <!-- قائمة الوجبات -->
   <main class="max-w-md mx-auto px-4 mt-2 space-y-3.5" id="menu-container"></main>
 
   <!-- زر السلة العائم الفاخر -->
@@ -128,7 +122,7 @@
       <div class="flex justify-between items-center pb-3 border-b border-neutral-800">
         <div>
           <h2 class="font-black text-lg text-amber-400">سلة طلباتك</h2>
-          <p class="text-xs text-neutral-400">مطعم الشيف زينب والشيف هادر</p>
+          <p class="text-xs text-neutral-400">مطعم الشيف زينب</p>
         </div>
         <button onclick="closeCartModal()" class="text-neutral-400 hover:text-white text-2xl w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center">&times;</button>
       </div>
@@ -154,7 +148,7 @@
           <div id="delivery-address-box" class="hidden">
             <input id="customer-address" type="text" placeholder="المنطقة - العنوان بالتفصيل وأقرب نقطة دالة" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl p-3 outline-none focus:border-amber-400 font-bold">
           </div>
-          <input id="customer-notes" type="text" placeholder="ملاحظات خاصة على الوجبات (بدون شطة، صوص زيادة...)" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl p-2.5 outline-none focus:border-amber-400">
+          <input id="customer-notes" type="text" placeholder="ملاحظات خاصة على الوجبات (مثال: صوص زيادة)" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl p-2.5 outline-none focus:border-amber-400">
         </div>
 
         <div class="bg-neutral-950 rounded-2xl p-3 space-y-1.5 text-xs text-neutral-400 border border-neutral-800">
@@ -181,19 +175,20 @@
   </div>
 
   <footer class="max-w-md mx-auto px-4 mt-8 text-center text-xs text-neutral-500 space-y-1">
-    <p>مطعم الشيف زينب والشيف هادر © كافة الحقوق محفوظة</p>
+    <p>مطعم الشيف زينب © كافة الحقوق محفوظة</p>
     <p class="text-[10px] text-amber-500/80">هاتف: 07763133800 | إنستغرام: @alshyfzynb</p>
   </footer>
 
   <script>
-    const STORAGE_KEY = 'chef_zainab_master_store';
+    const STORAGE_KEY = 'chef_zainab_master_store_v4';
 
-    // الأطباق الرسمية الـ 7 كما في البوستر تماماً
     const defaultData = {
       restaurant: {
-        name: "مطعم الشيف زينب والشيف هادر",
+        name: "مطعم الشيف زينب",
         phone: "07763133800",
         whatsapp: "9647763133800",
+        hours: "يومياً: 12:00 ظهراً - 12:00 ليلاً",
+        location: "الفرع الرئيسي - أشهى المأكولات السريعة والشرقية",
         instagram: "@alshyfzynb",
         deliveryFee: 2000,
         isOpen: true
@@ -204,8 +199,8 @@
           title: "برجر الشيف الفاخر (Burger)",
           category: "وجبات سريعة",
           price: 5000,
-          desc: "شريحة لحم صافي طازج مشوي على اللهب مع خضار مقرمشة وجبن شيدر وصوص الشيف الخاص",
-          img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
+          desc: "شريحة لحم طازج مشوي على اللهب مع جبن شيدر ذائب، خس طازج، طماطم وصوص الشيف الخاص في خبز بريوش طري.",
+          img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500",
           available: true
         },
         {
@@ -213,8 +208,8 @@
           title: "شاورما الشيف الخاصة (Shawarma)",
           category: "شاورما وسندويش",
           price: 4000,
-          desc: "شاورما متبلة بخلطة بهارات الشيف العريقة مع الثومية والمخلل المقرمش في خبز صاج طازج",
-          img: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400",
+          desc: "شرائح شاورما غنية متبلة بأعرق البهارات الخاصة مع الثومية الأصلية والمخلل المقرمش ملفوفة في خبز الصاج الساخن.",
+          img: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500",
           available: true
         },
         {
@@ -222,8 +217,8 @@
           title: "دجاج مشوي على الفحم (Grilled Chicken)",
           category: "أطباق رئيسية",
           price: 11000,
-          desc: "دجاجة كاملة طازجة متبلة بخلطة الشيف السرية ومشوية على الفحم مع صوصات وخبز ساخن",
-          img: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400",
+          desc: "دجاجة كاملة متبلة بخلطة الشيف زينب السرية ومشوية على الفحم حتى النضج مع الصوصات والخبز العراقي الحار.",
+          img: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=500",
           available: true
         },
         {
@@ -231,8 +226,8 @@
           title: "ساندويتش فلافل الشيف (Falafel)",
           category: "وجبات سريعة",
           price: 1500,
-          desc: "أقراص فلافل مقرمشة وذهبية محضرة منزلياً مع طرشي وعنبة وسلطة في صمون عراقي حار",
-          img: "https://images.unsplash.com/photo-1593001874117-c99c800e3eb7?w=400",
+          desc: "أقراص فلافل مقرمشة ذهبية محضرة منزلياً مع طرشي مشكل، عنبة عراقية أصلية وسلطة طازجة في صمون ساخن.",
+          img: "https://images.unsplash.com/photo-1593001874117-c99c800e3eb7?w=500",
           available: true
         },
         {
@@ -240,8 +235,8 @@
           title: "زنجر دجاج كرسبي حار (Zinger)",
           category: "وجبات سريعة",
           price: 5000,
-          desc: "صدر دجاج مقرمش بخلطة الزنجر المقرمشة واللذيذة مع خس ومايونيز وصوص حار وجبن",
-          img: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=400",
+          desc: "قطعة صدر دجاج مقرمشة بتتبيلة الزنجر الحارة اللذيذة مع خس ومايونيز وصوص حار وجبنة شيدر غنية.",
+          img: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=500",
           available: true
         },
         {
@@ -249,17 +244,17 @@
           title: "تكة لحم ودجاج مشوية (Tikka)",
           category: "مشويات",
           price: 8000,
-          desc: "شيش تكة لحم أو دجاج طري متبل بالليمون والبهارات ومشوي على الفحم مع طماطة وبصل مشوي",
-          img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400",
+          desc: "أسياخ تكة طرية محضرة بأجود أنواع اللحم ومتبلة بالليمون والبهارات ومشوية على الفحم مع الطماطم والبصل المشوي.",
+          img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500",
           available: true
         },
         {
           id: 7,
-          title: "ريزو الشيف الشهير (Rizzo)",
+          title: "ريزو الشيف المميز (Rizzo)",
           category: "أطباق رئيسية",
           price: 5000,
-          desc: "رز مبهر ومتبل بخلطة الشيف الخاصة مع قطع الدجاج الكرسبي الذهبية وصوص الباربكيو والريزو الحصري",
-          img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400",
+          desc: "رز مبهر بنكهة خاصة مع قطع الدجاج المقرمشة الذهبية وصوص الباربكيو والريزو الشهير الخاص بالشيف زينب.",
+          img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=500",
           available: true
         }
       ]
@@ -268,6 +263,18 @@
     let appData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultData;
     let cart = [];
     let activeCategory = 'الكل';
+
+    function initUI() {
+      document.getElementById('brand-name').innerText = appData.restaurant.name;
+      document.getElementById('brand-hours').innerText = appData.restaurant.hours;
+      document.getElementById('brand-phone').innerText = appData.restaurant.phone;
+      document.getElementById('brand-location').innerHTML = `<span class="text-amber-400">📍</span> ${appData.restaurant.location}`;
+      document.getElementById('brand-call').href = `tel:${appData.restaurant.phone}`;
+      document.title = appData.restaurant.name;
+
+      renderCategories();
+      renderMenu();
+    }
 
     function renderCategories() {
       const categories = ['الكل', ...new Set(appData.items.map(i => i.category))];
@@ -289,9 +296,14 @@
       const container = document.getElementById('menu-container');
       const filtered = activeCategory === 'الكل' ? appData.items : appData.items.filter(i => i.category === activeCategory);
 
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="text-center py-10 text-neutral-500 text-xs">لا توجد وجبات في هذا القسم حالياً</div>`;
+        return;
+      }
+
       container.innerHTML = filtered.map(item => `
         <div class="bg-neutral-900/90 rounded-3xl p-3.5 border border-neutral-800 hover:border-amber-500/40 shadow-lg flex gap-3.5 items-center transition-all ${!item.available ? 'opacity-50 grayscale' : ''}">
-          <img src="${item.img}" alt="${item.title}" class="w-22 h-22 rounded-2xl object-cover flex-shrink-0 border border-neutral-800 shadow-md">
+          <img src="${item.img}" alt="${item.title}" class="w-24 h-24 rounded-2xl object-cover flex-shrink-0 border border-neutral-800 shadow-md">
           <div class="flex-1 min-w-0">
             <div class="flex justify-between items-start">
               <h3 class="font-black text-amber-200 text-sm truncate">${item.title}</h3>
@@ -424,8 +436,7 @@
       window.open(url, '_blank');
     }
 
-    renderCategories();
-    renderMenu();
+    initUI();
   </script>
 </body>
 </html>

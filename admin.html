@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إدارة مطعم الشيف زينب والشيف هادر</title>
+  <title>إدارة مطعم الشيف زينب</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <style>body { font-family: 'Tajawal', sans-serif; }</style>
 </head>
-<body class="bg-neutral-950 text-neutral-200 min-h-screen p-4 pb-20">
+<body class="bg-neutral-950 text-neutral-200 min-h-screen p-4 pb-24">
 
-  <div class="max-w-lg mx-auto bg-neutral-900 rounded-3xl border border-amber-500/40 shadow-2xl overflow-hidden">
+  <div class="max-w-xl mx-auto bg-neutral-900 rounded-3xl border border-amber-500/40 shadow-2xl overflow-hidden">
     
+    <!-- الترويسة -->
     <div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 text-black p-5 flex justify-between items-center">
       <div>
-        <h1 class="text-base font-black">👑 لوحة تحكم الشيف زينب والشيف هادر</h1>
-        <p class="text-xs font-bold text-neutral-900">تعديل الأسعار وإدارة الأطباق الـ 7 والطلبات</p>
+        <h1 class="text-base font-black">👑 لوحة إدارة مطعم الشيف زينب</h1>
+        <p class="text-xs font-bold text-neutral-900">تحكم كامل بالأسماء، الأسعار، الأطباق والصور</p>
       </div>
       <a href="index.html" class="text-xs bg-black text-amber-400 px-3 py-1.5 rounded-xl font-black">
         عرض المتجر 🌐
@@ -25,8 +26,8 @@
     <!-- تسجيل الدخول -->
     <div id="login-box" class="p-6 space-y-4">
       <div class="text-center space-y-1">
-        <h2 class="font-black text-amber-400 text-base">تسجيل الدخول للإدارة</h2>
-        <p class="text-xs text-neutral-400">أدخل الرمز السري الخاص بك للمتابعة</p>
+        <h2 class="font-black text-amber-400 text-base">تسجيل الدخول للوحة التحكم</h2>
+        <p class="text-xs text-neutral-400">أدخلي الرمز السري للمتابعة</p>
       </div>
       <input type="password" id="admin-pass" placeholder="••••" class="w-full bg-neutral-950 border border-neutral-700 rounded-2xl p-3 outline-none focus:border-amber-400 font-black text-center tracking-[0.5em] text-xl text-white">
       <button onclick="login()" class="w-full bg-amber-500 hover:bg-amber-400 text-black font-black py-3.5 rounded-2xl shadow-lg transition-all">
@@ -34,21 +35,51 @@
       </button>
     </div>
 
-    <!-- لوحة التحكم -->
+    <!-- المحتوى بعد تسجيل الدخول -->
     <div id="dashboard" class="hidden p-5 space-y-6">
-      
-      <!-- إعدادات الأسعار والأصناف الحالية -->
-      <div class="space-y-3">
-        <h3 class="font-black text-amber-400 text-xs">📋 تعديل أسعار الأطباق وتوافرها:</h3>
-        <div id="meals-list" class="space-y-2.5 max-h-96 overflow-y-auto pr-1"></div>
+
+      <!-- تعديل بيانات المطعم الأساسية -->
+      <div class="border border-neutral-800 rounded-2xl p-4 bg-neutral-950 space-y-3">
+        <h3 class="font-black text-amber-400 text-xs">🏢 بيانات المطعم والواتساب:</h3>
+        <div>
+          <label class="block text-[11px] text-neutral-400 mb-1">اسم المطعم</label>
+          <input id="cfg-name" type="text" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2 text-xs font-bold text-white">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[11px] text-neutral-400 mb-1">رقم الهاتف الظاهر</label>
+            <input id="cfg-phone" type="text" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2 text-xs font-bold text-white">
+          </div>
+          <div>
+            <label class="block text-[11px] text-neutral-400 mb-1">رقم الواتساب لاستقبال الطلب</label>
+            <input id="cfg-whatsapp" type="text" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2 text-xs font-bold text-white">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[11px] text-neutral-400 mb-1">أجرة التوصيل (د.ع)</label>
+            <input id="cfg-delivery" type="number" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2 text-xs font-bold text-white">
+          </div>
+          <div>
+            <label class="block text-[11px] text-neutral-400 mb-1">أوقات العمل</label>
+            <input id="cfg-hours" type="text" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2 text-xs font-bold text-white">
+          </div>
+        </div>
+        <div>
+          <label class="block text-[11px] text-neutral-400 mb-1">العنوان أو النبذة</label>
+          <input id="cfg-location" type="text" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2 text-xs font-bold text-white">
+        </div>
+        <button onclick="saveBrandSettings()" class="w-full bg-neutral-800 hover:bg-neutral-700 text-amber-400 border border-amber-500/40 font-black py-2.5 rounded-xl transition-all">
+          حفظ إعدادات المطعم
+        </button>
       </div>
 
-      <!-- إضافة طبق جديد -->
+      <!-- إضافة طبق جديد (مع رفع الصورة من الجهاز مباشرة) -->
       <div class="border border-neutral-800 rounded-2xl p-4 bg-neutral-950 space-y-3">
-        <h3 class="font-black text-amber-400 text-xs">➕ إضافة طبق أو عرض جديد:</h3>
-        <input id="new-title" type="text" placeholder="اسم الوجبة" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2.5 text-xs font-bold text-white">
+        <h3 class="font-black text-amber-400 text-xs">➕ إضافة طبق أو وجبة جديدة:</h3>
+        <input id="new-title" type="text" placeholder="اسم الوجبة (مثلاً: برجر لحم مدخن)" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2.5 text-xs font-bold text-white">
         <div class="grid grid-cols-2 gap-2">
-          <input id="new-price" type="number" placeholder="السعر بالدينار (مثال: 5000)" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2.5 text-xs font-bold text-white">
+          <input id="new-price" type="number" placeholder="السعر بالدينار (مثلاً: 5000)" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2.5 text-xs font-bold text-white">
           <select id="new-cat" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2.5 text-xs font-bold text-white">
             <option value="وجبات سريعة">وجبات سريعة</option>
             <option value="شاورما وسندويش">شاورما وسندويش</option>
@@ -57,79 +88,202 @@
             <option value="مقبلات وعصائر">مقبلات وعصائر</option>
           </select>
         </div>
-        <input id="new-desc" type="text" placeholder="الوصف والمكونات" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2.5 text-xs text-white">
-        <input id="new-img" type="text" placeholder="رابط صورة الوجبة" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2.5 text-xs text-white">
-        <button onclick="addNewMeal()" class="w-full bg-amber-500 hover:bg-amber-400 text-black font-black py-2.5 rounded-xl shadow-md">إضافة الطبق فوراً</button>
+        <textarea id="new-desc" placeholder="وصف الطبق ومكوناته بالتفصيل" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl p-2.5 text-xs text-white h-20"></textarea>
+        
+        <div>
+          <label class="block text-[11px] text-neutral-400 mb-1">اختر صورة الطبق من هاتفك أو حاسوبك:</label>
+          <input type="file" id="new-file-img" accept="image/*" class="w-full text-xs text-neutral-400 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-amber-500 file:text-black hover:file:bg-amber-400 cursor-pointer">
+        </div>
+
+        <button onclick="addNewMeal()" class="w-full bg-amber-500 hover:bg-amber-400 text-black font-black py-2.5 rounded-xl shadow-md transition-all">
+          إضافة الطبق الآن
+        </button>
+      </div>
+
+      <!-- قائمة الأطباق الحالية مع إمكانية التعديل الشامل والحذف -->
+      <div class="space-y-3">
+        <h3 class="font-black text-amber-400 text-xs">📋 تعديل وحذف الأطباق الحالية:</h3>
+        <div id="meals-list" class="space-y-3"></div>
       </div>
 
     </div>
   </div>
 
+  <!-- نافذة منبثقة لتعديل تفاصيل الطبق بالكامل -->
+  <div id="edit-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4">
+    <div class="bg-neutral-900 border border-amber-500/40 rounded-3xl w-full max-w-md p-5 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-neutral-800 pb-2">
+        <h4 class="font-black text-amber-400 text-sm">تعديل بيانات الطبق</h4>
+        <button onclick="closeEditModal()" class="text-neutral-400 text-xl">&times;</button>
+      </div>
+      <input type="hidden" id="edit-id">
+      <div>
+        <label class="block text-[11px] text-neutral-400 mb-1">اسم الوجبة</label>
+        <input id="edit-title" type="text" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl p-2 text-xs font-bold text-white">
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <div>
+          <label class="block text-[11px] text-neutral-400 mb-1">السعر (د.ع)</label>
+          <input id="edit-price" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl p-2 text-xs font-bold text-white">
+        </div>
+        <div>
+          <label class="block text-[11px] text-neutral-400 mb-1">القسم</label>
+          <select id="edit-cat" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl p-2 text-xs font-bold text-white">
+            <option value="وجبات سريعة">وجبات سريعة</option>
+            <option value="شاورما وسندويش">شاورما وسندويش</option>
+            <option value="أطباق رئيسية">أطباق رئيسية</option>
+            <option value="مشويات">مشويات</option>
+            <option value="مقبلات وعصائر">مقبلات وعصائر</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-[11px] text-neutral-400 mb-1">الوصف والمكونات</label>
+        <textarea id="edit-desc" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl p-2 text-xs text-white h-20"></textarea>
+      </div>
+      <div>
+        <label class="block text-[11px] text-neutral-400 mb-1">تغيير الصورة (اختياري من جهازك):</label>
+        <input type="file" id="edit-file-img" accept="image/*" class="w-full text-xs text-neutral-400 file:mr-2 file:py-1 file:px-2.5 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-amber-500 file:text-black">
+      </div>
+      <button onclick="saveItemChanges()" class="w-full bg-amber-500 hover:bg-amber-400 text-black font-black py-2.5 rounded-xl transition-all">
+        حفظ التعديلات
+      </button>
+    </div>
+  </div>
+
   <script>
-    const STORAGE_KEY = 'chef_zainab_master_store';
-    let appData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    const STORAGE_KEY = 'chef_zainab_master_store_v4';
+
+    const defaultData = {
+      restaurant: {
+        name: "مطعم الشيف زينب",
+        phone: "07763133800",
+        whatsapp: "9647763133800",
+        hours: "يومياً: 12:00 ظهراً - 12:00 ليلاً",
+        location: "الفرع الرئيسي - أشهى المأكولات السريعة والشرقية",
+        instagram: "@alshyfzynb",
+        deliveryFee: 2000,
+        isOpen: true
+      },
+      items: [
+        { id: 1, title: "برجر الشيف الفاخر (Burger)", category: "وجبات سريعة", price: 5000, desc: "شريحة لحم طازج مشوي على اللهب مع جبن شيدر ذائب، خس طازج، طماطم وصوص الشيف الخاص في خبز بريوش طري.", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500", available: true },
+        { id: 2, title: "شاورما الشيف الخاصة (Shawarma)", category: "شاورما وسندويش", price: 4000, desc: "شرائح شاورما غنية متبلة بأعرق البهارات الخاصة مع الثومية الأصلية والمخلل المقرمش ملفوفة في خبز الصاج الساخن.", img: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", available: true },
+        { id: 3, title: "دجاج مشوي على الفحم (Grilled Chicken)", category: "أطباق رئيسية", price: 11000, desc: "دجاجة كاملة متبلة بخلطة الشيف زينب السرية ومشوية على الفحم حتى النضج مع الصوصات والخبز العراقي الحار.", img: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=500", available: true },
+        { id: 4, title: "ساندويتش فلافل الشيف (Falafel)", category: "وجبات سريعة", price: 1500, desc: "أقراص فلافل مقرمشة ذهبية محضرة منزلياً مع طرشي مشكل، عنبة عراقية أصلية وسلطة طازجة في صمون ساخن.", img: "https://images.unsplash.com/photo-1593001874117-c99c800e3eb7?w=500", available: true },
+        { id: 5, title: "زنجر دجاج كرسبي حار (Zinger)", category: "وجبات سريعة", price: 5000, desc: "قطعة صدر دجاج مقرمشة بتتبيلة الزنجر الحارة اللذيذة مع خس ومايونيز وصوص حار وجبنة شيدر غنية.", img: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=500", available: true },
+        { id: 6, title: "تكة لحم ودجاج مشوية (Tikka)", category: "مشويات", price: 8000, desc: "أسياخ تكة طرية محضرة بأجود أنواع اللحم ومتبلة بالليمون والبهارات ومشوية على الفحم مع الطماطم والبصل المشوي.", img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500", available: true },
+        { id: 7, title: "ريزو الشيف المميز (Rizzo)", category: "أطباق رئيسية", price: 5000, desc: "رز مبهر بنكهة خاصة مع قطع الدجاج المقرمشة الذهبية وصوص الباربكيو والريزو الشهير الخاص بالشيف زينب.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=500", available: true }
+      ]
+    };
+
+    let appData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultData;
 
     function login() {
       const p = document.getElementById('admin-pass').value.trim();
       if (p === '1991') {
         document.getElementById('login-box').classList.add('hidden');
         document.getElementById('dashboard').classList.remove('hidden');
+        loadBrandForm();
         renderMeals();
       } else {
         alert('رمز الدخول غير صحيح!');
       }
     }
 
+    function saveAll() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+    }
+
+    function loadBrandForm() {
+      document.getElementById('cfg-name').value = appData.restaurant.name;
+      document.getElementById('cfg-phone').value = appData.restaurant.phone;
+      document.getElementById('cfg-whatsapp').value = appData.restaurant.whatsapp;
+      document.getElementById('cfg-delivery').value = appData.restaurant.deliveryFee;
+      document.getElementById('cfg-hours').value = appData.restaurant.hours;
+      document.getElementById('cfg-location').value = appData.restaurant.location;
+    }
+
+    function saveBrandSettings() {
+      appData.restaurant.name = document.getElementById('cfg-name').value;
+      appData.restaurant.phone = document.getElementById('cfg-phone').value;
+      appData.restaurant.whatsapp = document.getElementById('cfg-whatsapp').value;
+      appData.restaurant.deliveryFee = Number(document.getElementById('cfg-delivery').value);
+      appData.restaurant.hours = document.getElementById('cfg-hours').value;
+      appData.restaurant.location = document.getElementById('cfg-location').value;
+      saveAll();
+      alert('تم حفظ إعدادات المطعم بنجاح!');
+    }
+
     function renderMeals() {
       const list = document.getElementById('meals-list');
       list.innerHTML = appData.items.map(item => `
-        <div class="border border-neutral-800 rounded-2xl p-3 bg-neutral-950 flex justify-between items-center shadow-sm">
-          <div>
-            <div class="font-black text-amber-200 text-xs">${item.title}</div>
-            <div class="text-[11px] text-neutral-400 font-bold mt-0.5">${item.price.toLocaleString()} د.ع - <span class="text-amber-500">${item.category}</span></div>
+        <div class="border border-neutral-800 rounded-2xl p-3.5 bg-neutral-950 flex flex-col gap-2.5 shadow-sm">
+          <div class="flex gap-3 items-center">
+            <img src="${item.img}" alt="${item.title}" class="w-16 h-16 rounded-xl object-cover border border-neutral-800">
+            <div class="flex-1 min-w-0">
+              <div class="font-black text-amber-200 text-sm truncate">${item.title}</div>
+              <div class="text-[11px] text-neutral-400 font-bold mt-0.5">${item.price.toLocaleString()} د.ع - <span class="text-amber-500">${item.category}</span></div>
+              <p class="text-[10px] text-neutral-500 line-clamp-1 mt-0.5">${item.desc}</p>
+            </div>
           </div>
-          <div class="flex items-center gap-1.5">
-            <button onclick="editPrice(${item.id})" class="px-2.5 py-1 rounded-lg text-xs bg-neutral-800 text-amber-300 font-bold hover:bg-neutral-700">
-              تعديل السعر
+          <div class="flex items-center gap-2 border-t border-neutral-900 pt-2">
+            <button onclick="openEditModal(${item.id})" class="flex-1 py-1.5 rounded-xl text-xs bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold hover:bg-amber-500/30">
+              تعديل كامل ✏️
             </button>
-            <button onclick="toggleAvail(${item.id})" class="px-2.5 py-1 rounded-lg text-xs font-black ${item.available ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-red-950 text-red-400 border border-red-800'}">
+            <button onclick="toggleAvail(${item.id})" class="px-3 py-1.5 rounded-xl text-xs font-black ${item.available ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-red-950 text-red-400 border border-red-800'}">
               ${item.available ? 'متوفر' : 'نفد'}
             </button>
-            <button onclick="deleteMeal(${item.id})" class="px-2 py-1 rounded-lg text-xs bg-neutral-900 text-red-400 hover:bg-red-950 font-bold">
-              حذف
+            <button onclick="deleteMeal(${item.id})" class="px-3 py-1.5 rounded-xl text-xs bg-neutral-900 text-red-400 border border-neutral-800 hover:bg-red-950 font-bold">
+              حذف 🗑️
             </button>
           </div>
         </div>
       `).join('');
     }
 
-    function editPrice(id) {
-      const item = appData.items.find(i => i.id === id);
-      if (item) {
-        const np = prompt(`أدخل السعر الجديد لـ (${item.title}):`, item.price);
-        if (np !== null && !isNaN(np)) {
-          item.price = Number(np);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
-          renderMeals();
-        }
-      }
-    }
-
     function toggleAvail(id) {
       const item = appData.items.find(i => i.id === id);
       if (item) {
         item.available = !item.available;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+        saveAll();
         renderMeals();
       }
     }
 
     function deleteMeal(id) {
-      if (confirm('هل أنت متأكد من حذف هذا الطبق؟')) {
+      if (confirm('هل أنت متأكد من حذف هذا الطبق نهائياً؟')) {
         appData.items = appData.items.filter(i => i.id !== id);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+        saveAll();
         renderMeals();
       }
+    }
+
+    // ضغط وتحويل الصورة المرفوعة من الجهاز إلى Base64 لتعمل فوراً
+    function compressImage(file, callback) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          const maxDim = 500;
+          if (width > height && width > maxDim) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else if (height > maxDim) {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          callback(canvas.toDataURL('image/jpeg', 0.7));
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
 
     function addNewMeal() {
@@ -137,27 +291,81 @@
       const price = Number(document.getElementById('new-price').value);
       const cat = document.getElementById('new-cat').value;
       const desc = document.getElementById('new-desc').value.trim();
-      const img = document.getElementById('new-img').value.trim();
+      const fileInput = document.getElementById('new-file-img');
 
-      if (!title || isNaN(price)) return alert('يرجى كتابة اسم الوجبة وسعرها!');
+      if (!title || isNaN(price)) return alert('يرجى إدخال اسم الوجبة وسعرها!');
 
-      appData.items.push({
-        id: Date.now(),
-        title,
-        price,
-        category: cat,
-        desc,
-        img: img || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400',
-        available: true
-      });
+      const saveItemWithImage = (imageUrl) => {
+        appData.items.push({
+          id: Date.now(),
+          title,
+          price,
+          category: cat,
+          desc: desc || "وجبة مميزة ومحضرة طازجة من مطعم الشيف زينب.",
+          img: imageUrl,
+          available: true
+        });
+        saveAll();
+        document.getElementById('new-title').value = '';
+        document.getElementById('new-price').value = '';
+        document.getElementById('new-desc').value = '';
+        fileInput.value = '';
+        renderMeals();
+        alert('تمت إضافة الطبق بنجاح!');
+      };
 
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
-      document.getElementById('new-title').value = '';
-      document.getElementById('new-price').value = '';
-      document.getElementById('new-desc').value = '';
-      document.getElementById('new-img').value = '';
-      renderMeals();
-      alert('تمت إضافة الطبق بنجاح!');
+      if (fileInput.files && fileInput.files[0]) {
+        compressImage(fileInput.files[0], (dataUrl) => {
+          saveItemWithImage(dataUrl);
+        });
+      } else {
+        saveItemWithImage('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500');
+      }
+    }
+
+    function openEditModal(id) {
+      const item = appData.items.find(i => i.id === id);
+      if (!item) return;
+
+      document.getElementById('edit-id').value = item.id;
+      document.getElementById('edit-title').value = item.title;
+      document.getElementById('edit-price').value = item.price;
+      document.getElementById('edit-cat').value = item.category;
+      document.getElementById('edit-desc').value = item.desc;
+      document.getElementById('edit-file-img').value = '';
+
+      document.getElementById('edit-modal').classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+      document.getElementById('edit-modal').classList.add('hidden');
+    }
+
+    function saveItemChanges() {
+      const id = Number(document.getElementById('edit-id').value);
+      const item = appData.items.find(i => i.id === id);
+      if (!item) return;
+
+      item.title = document.getElementById('edit-title').value.trim();
+      item.price = Number(document.getElementById('edit-price').value);
+      item.category = document.getElementById('edit-cat').value;
+      item.desc = document.getElementById('edit-desc').value.trim();
+
+      const fileInput = document.getElementById('edit-file-img');
+      if (fileInput.files && fileInput.files[0]) {
+        compressImage(fileInput.files[0], (dataUrl) => {
+          item.img = dataUrl;
+          saveAll();
+          renderMeals();
+          closeEditModal();
+          alert('تم حفظ التعديلات وتحديث الصورة بنجاح!');
+        });
+      } else {
+        saveAll();
+        renderMeals();
+        closeEditModal();
+        alert('تم حفظ التعديلات بنجاح!');
+      }
     }
   </script>
 </body>

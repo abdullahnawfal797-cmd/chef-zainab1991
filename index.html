@@ -30,13 +30,13 @@
     <span id="status-top-text">مفتوح الآن لاستقبال الطلبات</span>
   </div>
 
-  <!-- رأس الصفحة الفاخر بتصميم صفحة هبوط إعلانية -->
+  <!-- رأس الصفحة الفاخر -->
   <header class="bg-white/90 backdrop-blur-md shadow-sm border-b border-red-100 sticky top-0 z-30">
     <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
       <!-- الشعار واسم المطعم (3 نقرات سريعة لفتح لوحة التحكم) -->
-      <div class="flex items-center gap-3 cursor-pointer select-none" id="secret-admin-trigger" title="مطعم الشيف زينب">
+      <div class="flex items-center gap-3 cursor-pointer select-none" id="secret-admin-trigger" onclick="handleSecretClick()" title="مطعم الشيف زينب">
         <div class="relative">
-          <img id="display-logo" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160" alt="Logo" class="w-13 h-13 w-12 h-12 rounded-2xl object-cover ring-2 ring-red-600 shadow-md">
+          <img id="display-logo" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160" alt="Logo" class="w-12 h-12 rounded-2xl object-cover ring-2 ring-red-600 shadow-md pointer-events-none">
           <span id="display-status-ping" class="absolute -bottom-1 -left-1 flex h-3.5 w-3.5">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white"></span>
@@ -84,7 +84,7 @@
     <div id="category-bar" class="flex gap-2 overflow-x-auto no-scrollbar py-1"></div>
   </nav>
 
-  <!-- قائمة الوجبات (توزيع مرن وشامل) -->
+  <!-- قائمة الوجبات -->
   <main class="max-w-md mx-auto px-4 mt-2 space-y-4" id="menu-container"></main>
 
   <!-- شريط السلة العائم -->
@@ -353,19 +353,30 @@
     let cart = [];
     let activeCategory = 'الكل';
 
-    // النقر 3 مرات سريعة لفتح لوحة التحكم
-    let clicks = 0;
-    let clickTimer = null;
-    document.getElementById('secret-admin-trigger').addEventListener('click', () => {
-      clicks++;
-      if (clicks === 1) {
-        clickTimer = setTimeout(() => { clicks = 0; }, 600);
-      } else if (clicks >= 3) {
-        clearTimeout(clickTimer);
-        clicks = 0;
+    // نظام فتح لوحة التحكم السري (3 نقرات أو ضغطة مطولة)
+    let secretClickCount = 0;
+    let secretClickTimer = null;
+
+    function handleSecretClick() {
+      secretClickCount++;
+      clearTimeout(secretClickTimer);
+      if (secretClickCount >= 3) {
+        secretClickCount = 0;
         openAdminModal();
+      } else {
+        secretClickTimer = setTimeout(() => {
+          secretClickCount = 0;
+        }, 1500); // مهلة مريحة مدتها 1.5 ثانية
       }
-    });
+    }
+
+    // دعم الضغط المطول للهواتف الذكية (لمدة 2 ثانية)
+    const triggerEl = document.getElementById('secret-admin-trigger');
+    let pressTimer = null;
+    triggerEl.addEventListener('touchstart', () => {
+      pressTimer = setTimeout(openAdminModal, 2000);
+    }, {passive: true});
+    triggerEl.addEventListener('touchend', () => clearTimeout(pressTimer));
 
     function persistData() {
       localStorage.setItem('chef_zainab_v3', JSON.stringify(appData));
@@ -378,7 +389,6 @@
       document.getElementById('display-logo').src = appData.restaurant.logo;
       document.title = appData.restaurant.name;
 
-      // تحديث حالة الفتح والإغلاق
       const isOpen = appData.restaurant.isOpen !== false;
       const topBar = document.getElementById('status-top-bar');
       const topText = document.getElementById('status-top-text');
@@ -469,7 +479,6 @@
       });
     }
 
-    // منطق السلة
     function addToCart(id) {
       if (appData.restaurant.isOpen === false) {
         return alert('المطعم مغلق حالياً، نسعد باستقبال طلباتكم في أوقات العمل!');
@@ -546,7 +555,6 @@
     function openCartModal() { document.getElementById('cart-modal').classList.remove('hidden'); }
     function closeCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
 
-    // تثبيت الطلب وتحديث المبيعات اليومية
     function sendOrderToWhatsApp() {
       if (appData.restaurant.isOpen === false) {
         return alert('المطعم مغلق حالياً، لا يمكن إرسال الطلبات الآن.');
@@ -565,7 +573,6 @@
       const deliveryFee = isDelivery ? Number(appData.restaurant.deliveryFee || 0) : 0;
       const total = subtotal + deliveryFee;
 
-      // تسجيل الطلب في إحصائيات المبيعات
       if (!appData.salesHistory) appData.salesHistory = [];
       appData.salesHistory.push({
         id: Date.now(),
@@ -577,7 +584,6 @@
       });
       persistData();
 
-      // تجهيز رسالة الواتساب
       let message = `*طلب جديد من: ${appData.restaurant.name}* 🍔\n`;
       message += `-------------------------\n`;
       message += `*الزبون:* ${name}\n`;
@@ -603,11 +609,15 @@
     }
 
     // دوال الإدارة
-    function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
-    function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
+    function openAdminModal() {
+      document.getElementById('admin-modal').classList.remove('hidden');
+    }
+    function closeAdminModal() {
+      document.getElementById('admin-modal').classList.add('hidden');
+    }
 
     function verifyAdminPass() {
-      const pass = document.getElementById('admin-pass').value;
+      const pass = document.getElementById('admin-pass').value.trim();
       if (pass === (appData.restaurant.adminPass || '1991')) {
         document.getElementById('admin-auth-box').classList.add('hidden');
         document.getElementById('admin-dashboard-content').classList.remove('hidden');
